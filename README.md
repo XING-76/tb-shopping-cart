@@ -1,8 +1,10 @@
-# <a href=https://xing-76.github.io/tb-likes/ target=_blank>TB 購物車</a>
+# <a href=https://xing-76.github.io/tb-shopping-cart/ target=_blank>TB 購物車</a>
 
 ![default]()
 
 # Demo
+
+https://xing-76.github.io/tb-shopping-cart/
 
 # 聲明
 
