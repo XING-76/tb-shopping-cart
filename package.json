@@ -1,6 +1,7 @@
 {
   "name": "tb-shopping-cart",
   "version": "0.1.0",
+  "homepage": "https://xing-76.github.io/tb-shopping-cart/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -15,6 +16,7 @@
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "@types/styled-components": "^5.1.22",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-query": "^3.34.14",
@@ -24,6 +26,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
