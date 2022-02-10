@@ -1,25 +1,175 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+// Components
+import Item from './Item/Item';
+import Cart from './Cart/Cart';
+import { styled, alpha } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import Drawer from '@mui/material/Drawer';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Badge from '@mui/material/Badge';
+import Grid from '@mui/material/Grid';
+import LinearProgress from '@mui/material/LinearProgress';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+// Styled
+import { Wrapper, StyledButton } from './App.styles';
+// Types
+export type CartItemType = {
+  id: string;
+  category: string;
+  description: string;
+  imageUrl: string;
+  price: number;
+  title: string;
+  amount: number;
+}
 
-function App() {
+const getProducts = async (): Promise<CartItemType[]> =>{
+  const res = await (await fetch('https://vue3-course-api.hexschool.io/api/tb-ecommerce/products/all')).json();
+  return res.products
+} 
+
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
+
+const App = () => {
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([] as CartItemType[]);
+  const { data, isLoading, error } = useQuery<CartItemType[]>(
+    'product',
+    getProducts
+  );
+
+  const getTotalItems = (items: CartItemType[]): number => items.length
+  
+  const handleAddToCart = (clickedItem: CartItemType) => {
+    setCartItems(prev => {
+      // 1. 確認商品是否已存在購物車
+      const isItemInCart = prev.find(item => item.id === clickedItem.id)
+
+      if(isItemInCart) {
+        return prev.map(item =>
+          item.id === clickedItem.id
+            ? {...item, amount: item.amount + 1}
+            : item
+        )
+      }
+      // 第一次加入購物車
+      return [...prev, {...clickedItem, amount: 1}]
+    })
+  }
+  const handleRemoveFromCart = (id: string) => {
+    setCartItems(prev => 
+      prev.reduce((ack, item) => {
+        if(item.id === id) {
+          if(item.amount === 1) return ack
+          return [...ack, { ...item, amount: item.amount - 1} ]
+        } else {
+          return [...ack, item]
+        }
+      }, [] as CartItemType[])
+    )
+  }
+
+  if (isLoading) return <LinearProgress/>
+  if (error) return <div>錯誤顯示...</div>
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AppBar position="fixed">
+        <Toolbar>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: 'none', sm: 'block' } }}
+          >
+            TB
+          </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+          <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <IconButton aria-label="delete" size="large" onClick={() => setCartOpen(false)}>
+                <ChevronRightIcon />
+              </IconButton>
+            </Stack>
+            <Cart
+              cartItems={cartItems}
+              addToCart={handleAddToCart}
+              removeFromCart={handleRemoveFromCart}
+            />
+          </Drawer>
+          <StyledButton onClick={() => setCartOpen(true)}>
+            <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+              <AddShoppingCartIcon/>
+            </Badge>
+          </StyledButton>
+        </Toolbar>
+      </AppBar>
+      <Wrapper>
+        <Grid container spacing={3}>
+          {
+            data?.map(item => {
+              return (
+                <Grid item key={item.id} xs={6} sm={4} md={3}>
+                  <Item item={item} handleAddToCart={handleAddToCart}/>
+                </Grid>
+              )
+            })
+          }
+        </Grid>
+      </Wrapper>
+    </>
   );
 }
 
