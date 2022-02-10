@@ -1,10 +1,8 @@
 # <a href=https://xing-76.github.io/tb-likes/ target=_blank>TB 購物車</a>
 
-![default](https://i.imgur.com/BQcT4qe.png)
+![default]()
 
 # Demo
-
-https://xing-76.github.io/tb-likes/
 
 # 聲明
 
