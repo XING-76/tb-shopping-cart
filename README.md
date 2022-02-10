@@ -19,6 +19,7 @@
 - TypeScript
 - cra-template-typescript
 - React Hooks
+- React Query
 - styled-component
 - Material-UI
 - fetch 的使用
