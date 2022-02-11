@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 // Components
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
+import Logo from './assets/logo.png';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -142,9 +143,9 @@ const App = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
           >
-            TB
+            <img src={Logo} alt="logo" style={{width: '2rem'}}/>
           </Typography>
           <Search>
             <SearchIconWrapper>
