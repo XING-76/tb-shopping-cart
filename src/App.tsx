@@ -152,7 +152,7 @@ const App = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="搜尋"
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
