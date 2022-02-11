@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.js": "/tb-shopping-cart/static/js/main.ebff9b52.js",
+    "main.js": "/tb-shopping-cart/static/js/main.71177bff.js",
+    "static/media/logo.png": "/tb-shopping-cart/static/media/logo.cac6e5e37b47047dbfa4.png",
     "index.html": "/tb-shopping-cart/index.html",
-    "main.ebff9b52.js.map": "/tb-shopping-cart/static/js/main.ebff9b52.js.map"
+    "main.71177bff.js.map": "/tb-shopping-cart/static/js/main.71177bff.js.map"
   },
   "entrypoints": [
-    "static/js/main.ebff9b52.js"
+    "static/js/main.71177bff.js"
   ]
 }
