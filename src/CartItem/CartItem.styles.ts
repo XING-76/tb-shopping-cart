@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
     display: flex;
     justifu-content: space-between;
     .cart_qty {
-      width: 4rem;
+      width: 2rem;
       text-align: center;
     }
   }

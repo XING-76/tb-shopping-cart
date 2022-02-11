@@ -17,6 +17,9 @@ import LinearProgress from '@mui/material/LinearProgress';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
 // Styled
 import { Wrapper, StyledButton } from './App.styles';
 // Types
@@ -113,6 +116,12 @@ const App = () => {
       }, [] as CartItemType[])
     )
   }
+  const removeCart = (): void => {
+    setCartItems([] as CartItemType[])
+  }
+  const sendCart = (): void => {
+    setCartItems([] as CartItemType[])
+  }
 
   if (isLoading) return <LinearProgress/>
   if (error) return <div>錯誤顯示...</div>
@@ -148,6 +157,24 @@ const App = () => {
               addToCart={handleAddToCart}
               removeFromCart={handleRemoveFromCart}
             />
+            <Stack spacing={2} direction="row" style={{justifyContent: 'center', marginBottom: '2rem'}}>
+              <Button
+                variant="outlined"
+                size="large"
+                startIcon={<DeleteIcon />}
+                onClick={() => removeCart()}
+              >
+                清空
+              </Button>
+              <Button
+                variant="contained"
+                size="large"
+                endIcon={<SendIcon />}
+                onClick={() => sendCart()}
+              >
+                送出
+              </Button>
+            </Stack>
           </Drawer>
           <StyledButton onClick={() => setCartOpen(true)}>
             <Badge badgeContent={getTotalItems(cartItems)} color='error'>

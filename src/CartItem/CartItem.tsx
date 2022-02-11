@@ -1,6 +1,7 @@
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
 // Types
 import { CartItemType } from '../App';
 // Styles
@@ -24,22 +25,15 @@ const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => {
           </p>
         </div>
         <div className="buttons">
-          <Button
-            disableElevation
-            variant="outlined"
-            onClick={() => removeFromCart(item.id)}
-          >
-            <RemoveIcon />
-          </Button>
-          <p className="cart_qty">{item.amount}</p>
-          <Button
-            size="small"
-            disableElevation
-            variant="contained"
-            onClick={() => addToCart(item)}
-          >
-            <AddIcon />
-          </Button>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <IconButton size="small" onClick={() => removeFromCart(item.id)}>
+              <RemoveCircleOutlineOutlinedIcon fontSize="small" />
+            </IconButton>
+            <p className="cart_qty">{item.amount}</p>
+            <IconButton size="small" onClick={() => addToCart(item)}>
+              <AddCircleOutlinedIcon fontSize="small" />
+            </IconButton>
+          </Stack>
         </div>
       </div>
       <span className="cartImg">
