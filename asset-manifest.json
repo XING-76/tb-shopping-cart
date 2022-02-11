@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/tb-shopping-cart/static/js/main.1d3d07d0.js",
+    "main.js": "/tb-shopping-cart/static/js/main.ebff9b52.js",
     "index.html": "/tb-shopping-cart/index.html",
-    "main.1d3d07d0.js.map": "/tb-shopping-cart/static/js/main.1d3d07d0.js.map"
+    "main.ebff9b52.js.map": "/tb-shopping-cart/static/js/main.ebff9b52.js.map"
   },
   "entrypoints": [
-    "static/js/main.1d3d07d0.js"
+    "static/js/main.ebff9b52.js"
   ]
 }
