@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Drawer from '@mui/material/Drawer';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import Grid from '@mui/material/Grid';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -188,7 +188,7 @@ const App = () => {
           </Drawer>
           <StyledButton onClick={() => setCartOpen(true)}>
             <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-              <AddShoppingCartIcon/>
+              <ShoppingCartIcon/>
             </Badge>
           </StyledButton>
         </Toolbar>

@@ -1,6 +1,6 @@
 # <a href=https://xing-76.github.io/tb-shopping-cart/ target=_blank>TB 購物車</a>
 
-![default]()
+![default](https://i.imgur.com/QBwIctL.png)
 
 # Demo
 
