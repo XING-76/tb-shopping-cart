@@ -12,3 +12,12 @@ export const StyledButton = styled(IconButton)`
   right: 20px;
   color: white;
 `;
+
+export const ScrollTopButton = styled(IconButton)`
+  position: fixed;
+  z-index: 100;
+  right: 20px;
+  bottom: 20px;
+  color: black;
+  border: 1px solid black;
+`;

@@ -20,8 +20,10 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
+// ScrollBtn
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 // Styled
-import { Wrapper, StyledButton } from './App.styles';
+import { Wrapper, StyledButton, ScrollTopButton } from './App.styles';
 // Types
 export type CartItemType = {
   id: string;
@@ -38,7 +40,7 @@ const getProducts = async (): Promise<CartItemType[]> =>{
   return res.products
 } 
 
-
+// Search
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -78,9 +80,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// App
 const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
+  const [visible, setVisible] = useState(false);
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'product',
     getProducts
@@ -122,6 +126,12 @@ const App = () => {
   const sendCart = (): void => {
     setCartItems([] as CartItemType[])
   }
+  const goTop = (): void => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+  window.addEventListener('scroll', () => {
+    window.scrollY > 500 ? setVisible(true) : setVisible(false)
+  })
 
   if (isLoading) return <LinearProgress/>
   if (error) return <div>錯誤顯示...</div>
@@ -196,6 +206,12 @@ const App = () => {
           }
         </Grid>
       </Wrapper>
+      <ScrollTopButton
+        style={{display: visible ? 'flex' : 'none'}}
+        onClick={() => goTop()}
+      >
+        <KeyboardArrowUpIcon />
+      </ScrollTopButton>
     </>
   );
 }
