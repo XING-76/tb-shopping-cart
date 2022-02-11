@@ -20,7 +20,6 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
-// ScrollBtn
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 // Styled
 import { Wrapper, StyledButton, ScrollTopButton } from './App.styles';
@@ -198,20 +197,20 @@ const App = () => {
           {
             data?.map(item => {
               return (
-                <Grid item key={item.id} xs={6} sm={4} md={3}>
+                <Grid item key={item.id} xs={6} sm={4} md={3} lg={2}>
                   <Item item={item} handleAddToCart={handleAddToCart}/>
                 </Grid>
               )
             })
           }
         </Grid>
+        <ScrollTopButton
+          style={{display: visible ? 'flex' : 'none'}}
+          onClick={() => goTop()}
+        >
+          <KeyboardArrowUpIcon />
+        </ScrollTopButton>
       </Wrapper>
-      <ScrollTopButton
-        style={{display: visible ? 'flex' : 'none'}}
-        onClick={() => goTop()}
-      >
-        <KeyboardArrowUpIcon />
-      </ScrollTopButton>
     </>
   );
 }

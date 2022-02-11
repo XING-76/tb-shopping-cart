@@ -15,10 +15,15 @@ const Item: React.FC<Props> = ({item, handleAddToCart}) => {
       <img src={item.imageUrl} alt={item.title}/>
       <div>
         <h3>{item.title}</h3>
-        {/* <p>{item.description}</p> */}
         <h3>${item.price}</h3>
       </div>
-      <Button onClick={() => {handleAddToCart(item)}}>加入購物車</Button>
+      <Button
+       variant="contained"
+       color="secondary"
+       onClick={() => {handleAddToCart(item)}}
+      >
+        加入購物車
+      </Button>
     </Wrapper>
   )
 }

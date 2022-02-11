@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   justifu-content: space-between;
   font-family: Arial, Helvetica, sans-serif;
-  border-bottom: 1px solid lightblue;
+  border-bottom: 1px solid #373f50;
   padding-bottom: 20px;
 
   div {
